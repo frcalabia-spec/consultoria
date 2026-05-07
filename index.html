@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Francesc Calabia · Consultoría Estratégica en Educación</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0f0f10; --surface: #1a1a1d; --border: #2a2a2d;
+    --text: #ffffff; --muted: #a0a0a0;
+    --accent: #D97757; --accent-dim: rgba(217,119,87,0.12); --accent-dim2: rgba(217,119,87,0.22);
+    --green-dim: rgba(74,222,128,0.12); --blue-dim: rgba(96,165,250,0.12);
+    --yellow-dim: rgba(251,191,36,0.12); --r: 12px; --max: 1000px;
+  }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; line-height: 1.6; font-size: 16px; }
+  .container { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+
+  .hero { padding: 80px 24px 70px; text-align: center; max-width: var(--max); margin: 0 auto; }
+  .hero-badge { display: inline-flex; align-items: center; background: var(--accent-dim); border: 1px solid rgba(217,119,87,0.3); color: var(--accent); font-size: 12px; font-weight: 600; padding: 6px 16px; border-radius: 100px; margin-bottom: 28px; letter-spacing: 0.05em; text-transform: uppercase; }
+  .hero h1 { font-size: clamp(30px, 5vw, 52px); font-weight: 800; line-height: 1.12; letter-spacing: -0.03em; margin-bottom: 10px; }
+  .hero h1 span { color: var(--accent); }
+  .hero-name { font-size: 15px; color: var(--muted); margin-bottom: 18px; }
+  .hero-sub { font-size: 17px; color: var(--muted); max-width: 620px; margin: 0 auto 32px; line-height: 1.7; }
+  .hero-tags { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 40px; }
+  .hero-tag { background: var(--surface); border: 1px solid var(--border); color: var(--muted); font-size: 12px; font-weight: 500; padding: 5px 14px; border-radius: 100px; }
+  .hero-divider { width: 50px; height: 3px; background: var(--accent); margin: 0 auto; border-radius: 2px; }
+
+  .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 80px; }
+  .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 26px 18px; text-align: center; }
+  .stat-number { font-size: 36px; font-weight: 800; color: var(--accent); letter-spacing: -0.03em; line-height: 1; margin-bottom: 8px; }
+  .stat-label { font-size: 12px; color: var(--muted); font-weight: 500; line-height: 1.5; }
+
+  .section { margin-bottom: 80px; }
+  .section-label { font-size: 11px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px; }
+  .section-title { font-size: clamp(22px, 3vw, 32px); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 10px; }
+  .section-desc { color: var(--muted); font-size: 15px; max-width: 600px; margin-bottom: 32px; line-height: 1.7; }
+
+  .proof-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .proof-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 24px; transition: border-color 0.2s; }
+  .proof-card:hover { border-color: var(--accent); }
+  .proof-company { font-size: 11px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
+  .proof-metric { font-size: 34px; font-weight: 800; letter-spacing: -0.03em; line-height: 1; margin-bottom: 8px; }
+  .proof-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+  .prop-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .prop-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 26px 22px; transition: border-color 0.2s; }
+  .prop-card:hover { border-color: var(--accent); }
+  .prop-icon { font-size: 24px; margin-bottom: 14px; }
+  .prop-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+  .prop-desc { font-size: 13px; color: var(--muted); line-height: 1.65; }
+
+  .flow-steps { display: grid; grid-template-columns: repeat(5, 1fr); position: relative; }
+  .flow-step { position: relative; text-align: center; padding: 0 8px; }
+  .flow-step:not(:last-child)::after { content: ''; position: absolute; top: 26px; right: -14px; width: 28px; height: 2px; background: linear-gradient(90deg, var(--accent), rgba(217,119,87,0.2)); }
+  .step-circle { width: 52px; height: 52px; background: var(--accent-dim); border: 2px solid var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 17px; font-weight: 800; color: var(--accent); margin: 0 auto 14px; }
+  .step-title { font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+  .step-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+  .impact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .impact-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 26px; }
+  .impact-header { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+  .impact-icon-wrap { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+  .ig { background: var(--green-dim); } .ib { background: var(--blue-dim); } .iy { background: var(--yellow-dim); } .io { background: var(--accent-dim); }
+  .impact-title { font-size: 16px; font-weight: 700; }
+  .impact-items { list-style: none; }
+  .impact-items li { font-size: 13px; color: var(--muted); padding: 6px 0; border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; gap: 10px; line-height: 1.5; }
+  .impact-items li:last-child { border-bottom: none; }
+  .impact-items li::before { content: '→'; color: var(--accent); flex-shrink: 0; font-size: 12px; margin-top: 2px; }
+
+  .timeline { display: flex; flex-direction: column; }
+  .tl-item { display: flex; gap: 22px; padding-bottom: 30px; position: relative; }
+  .tl-item:not(:last-child)::before { content: ''; position: absolute; left: 18px; top: 42px; bottom: 0; width: 2px; background: var(--border); }
+  .tl-dot { width: 38px; height: 38px; border-radius: 50%; background: var(--accent-dim); border: 2px solid var(--accent); display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; margin-top: 2px; }
+  .tl-period { font-size: 11px; color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 3px; }
+  .tl-role { font-size: 16px; font-weight: 700; margin-bottom: 2px; }
+  .tl-company { font-size: 13px; color: var(--muted); margin-bottom: 10px; }
+  .tl-highlights { list-style: none; display: flex; flex-direction: column; gap: 3px; }
+  .tl-highlights li { font-size: 13px; color: var(--muted); display: flex; gap: 8px; line-height: 1.5; }
+  .tl-highlights li::before { content: '·'; color: var(--accent); font-weight: 700; flex-shrink: 0; }
+
+  .diff-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .diff-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 22px 24px; display: flex; gap: 18px; align-items: flex-start; }
+  .diff-num { font-size: 30px; font-weight: 800; color: var(--accent-dim2); line-height: 1; flex-shrink: 0; letter-spacing: -0.03em; }
+  .diff-title { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+  .diff-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+  .client-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .client-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 22px; text-align: center; }
+  .client-emoji { font-size: 28px; margin-bottom: 12px; }
+  .client-title { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+  .client-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+  .cta-box { background: var(--surface); border: 1px solid rgba(217,119,87,0.35); border-radius: 16px; padding: 52px 48px; text-align: center; position: relative; overflow: hidden; margin-bottom: 60px; }
+  .cta-box::before { content: ''; position: absolute; top: -80px; left: 50%; transform: translateX(-50%); width: 400px; height: 400px; background: radial-gradient(circle, rgba(217,119,87,0.08) 0%, transparent 70%); pointer-events: none; }
+  .cta-title { font-size: clamp(20px, 3vw, 28px); font-weight: 800; margin-bottom: 12px; letter-spacing: -0.02em; }
+  .cta-sub { color: var(--muted); font-size: 15px; max-width: 500px; margin: 0 auto 28px; line-height: 1.7; }
+  .cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .cta-btn { display: inline-block; background: var(--accent); color: white; font-weight: 700; font-size: 14px; padding: 13px 32px; border-radius: 8px; text-decoration: none; }
+  .cta-btn:hover { opacity: 0.88; }
+  .cta-btn-ghost { display: inline-block; background: transparent; color: var(--text); font-weight: 600; font-size: 14px; padding: 13px 32px; border-radius: 8px; text-decoration: none; border: 1px solid var(--border); }
+  .cta-btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+  footer { border-top: 1px solid var(--border); padding: 28px 24px; text-align: center; color: var(--muted); font-size: 12px; }
+
+  @media (max-width: 720px) {
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+    .proof-grid, .prop-grid, .client-grid { grid-template-columns: 1fr; }
+    .flow-steps { grid-template-columns: 1fr 1fr; gap: 20px; }
+    .flow-step::after { display: none; }
+    .impact-grid, .diff-grid { grid-template-columns: 1fr; }
+    .cta-box { padding: 36px 22px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-badge">🎓 Consultoría Estratégica · Sector Educación</div>
+  <h1>Crecimiento y rentabilidad de empresas<br>del <span>sector educativo</span></h1>
+  <p class="hero-name">Francesc Calabia Gibert · Barcelona</p>
+  <p class="hero-sub">Director ejecutivo y consultor con más de 25 años de experiencia. Especialista en educación superior, EdTech, formación profesional y K12. De la estrategia a la ejecución operativa.</p>
+  <div class="hero-tags">
+    <span class="hero-tag">Higher Education</span>
+    <span class="hero-tag">EdTech</span>
+    <span class="hero-tag">Formación Profesional</span>
+    <span class="hero-tag">K12</span>
+    <span class="hero-tag">Internacionalización</span>
+    <span class="hero-tag">Transformación Digital</span>
+    <span class="hero-tag">Interim Management</span>
+  </div>
+  <div class="hero-divider"></div>
+</div>
+
+<div class="container">
+
+
+
+  <!-- TRACK RECORD -->
+  <div class="section">
+    <div class="section-label">Track record</div>
+    <div class="section-title">Resultados reales, no promesas</div>
+    <p class="section-desc">Historial probado de transformación de negocios educativos con impacto medible en la cuenta de resultados.</p>
+    <div class="proof-grid">
+      <div class="proof-card">
+        <div class="proof-company">Nuclio Digital School</div>
+        <div class="proof-metric">+80%</div>
+        <div class="proof-desc">Crecimiento en facturación en 2022. +70% en número de alumnos y mejora de 20 puntos en margen bruto en 2023.</div>
+      </div>
+      <div class="proof-card">
+        <div class="proof-company">Hofmann Culinary School · 2025</div>
+        <div class="proof-metric">+35%</div>
+        <div class="proof-desc">Crecimiento del negocio con rediseño organizativo completo e internacionalización: alumnos internacionales representan el 25% de la facturación.</div>
+      </div>
+      <div class="proof-card">
+        <div class="proof-company">Deusto Formación · Planeta</div>
+        <div class="proof-metric">↑ P&L</div>
+        <div class="proof-desc">Área con problemas de rentabilidad revertida a positivo. Nuevo modelo comercial y reposicionamiento de marca con resultados sostenibles.</div>
+      </div>
+      <div class="proof-card">
+        <div class="proof-company">PlanetaDeAgostini</div>
+        <div class="proof-metric">+50%</div>
+        <div class="proof-desc">Incremento del LTV de clientes mediante estrategia CRM. Nuevo modelo de captación que mejoró los ingresos por lanzamiento en un 25%.</div>
+      </div>
+      <div class="proof-card">
+        <div class="proof-company">Planeta F&U · Internacional</div>
+        <div class="proof-metric">114</div>
+        <div class="proof-desc">Nacionalidades en el grupo (150.000 alumnos). Lideré la estrategia de internacionalización con sedes en Europa, África y Latinoamérica.</div>
+      </div>
+      <div class="proof-card">
+        <div class="proof-company">Profe Digital · Nuclio</div>
+        <div class="proof-metric">Pivot</div>
+        <div class="proof-desc">Rediseño del modelo de negocio para hacerlo rentable y escalable. Plataforma líder con 2.000 alumnos y 150.000 horas de clase.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROPUESTA -->
+  <div class="section">
+    <div class="section-label">Propuesta de valor</div>
+    <div class="section-title">Qué puedo hacer por tu empresa</div>
+    <p class="section-desc">Combino visión estratégica con capacidad de ejecución real. Conozco el sector por dentro porque llevo 25 años operando en él.</p>
+    <div class="prop-grid">
+      <div class="prop-card">
+        <div class="prop-icon">🔭</div>
+        <div class="prop-title">Diagnóstico y estrategia</div>
+        <div class="prop-desc">Identifico con rapidez qué está limitando el crecimiento o erosionando el margen. Diseño una hoja de ruta con prioridades claras y resultados medibles.</div>
+      </div>
+      <div class="prop-card">
+        <div class="prop-icon">💰</div>
+        <div class="prop-title">Crecimiento de ingresos</div>
+        <div class="prop-desc">Arquitectura de precios, nuevas líneas de negocio, captación, conversión, retención de alumnos y apertura a mercados internacionales.</div>
+      </div>
+      <div class="prop-card">
+        <div class="prop-icon">📊</div>
+        <div class="prop-title">Mejora de márgenes</div>
+        <div class="prop-desc">Revisión de estructura de costes, eficiencia operativa, modelo docente sostenible y sistemas de información para tomar mejores decisiones.</div>
+      </div>
+      <div class="prop-card">
+        <div class="prop-icon">⚙️</div>
+        <div class="prop-title">Plan operativo y ejecución</div>
+        <div class="prop-desc">Traduzco la estrategia en acciones concretas. Me implico en la implantación, trabajo con los equipos y resuelvo los bloqueos sobre la marcha.</div>
+      </div>
+      <div class="prop-card">
+        <div class="prop-icon">🌍</div>
+        <div class="prop-title">Internacionalización</div>
+        <div class="prop-desc">Estrategia y ejecución de planes de expansión. Experiencia real en apertura de sedes y captación de alumnos en múltiples mercados.</div>
+      </div>
+      <div class="prop-card">
+        <div class="prop-icon">🏗️</div>
+        <div class="prop-title">Transformación y escalado</div>
+        <div class="prop-desc">Rediseño organizativo, digitalización, nuevos modelos de negocio y estructuración de procesos para hacer la empresa escalable.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- METODOLOGÍA -->
+  <div class="section">
+    <div class="section-label">Cómo trabajo</div>
+    <div class="section-title">Del diagnóstico a los resultados</div>
+    <p class="section-desc">Un proceso estructurado y probado en múltiples instituciones educativas.</p>
+    <div class="flow-steps">
+      <div class="flow-step">
+        <div class="step-circle">1</div>
+        <div class="step-title">Diagnóstico</div>
+        <div class="step-desc">Auditoría rápida: negocio, operaciones, producto, equipo y finanzas. Quick wins y retos estructurales.</div>
+      </div>
+      <div class="flow-step">
+        <div class="step-circle">2</div>
+        <div class="step-title">Estrategia</div>
+        <div class="step-desc">Plan con objetivos, palancas de crecimiento, prioridades y KPIs de seguimiento.</div>
+      </div>
+      <div class="flow-step">
+        <div class="step-circle">3</div>
+        <div class="step-title">Plan operativo</div>
+        <div class="step-desc">Acciones concretas: quién, qué, cuándo y con qué recursos. Sin ambigüedad.</div>
+      </div>
+      <div class="flow-step">
+        <div class="step-circle">4</div>
+        <div class="step-title">Implantación</div>
+        <div class="step-desc">Acompañamiento activo con los equipos. Adaptación al contexto real.</div>
+      </div>
+      <div class="flow-step">
+        <div class="step-circle">5</div>
+        <div class="step-title">Resultados</div>
+        <div class="step-desc">Cuadro de mando, revisiones periódicas y ajustes hasta consolidar el impacto.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- IMPACTO -->
+  <div class="section">
+    <div class="section-label">Áreas de intervención</div>
+    <div class="section-title">Donde genero impacto real</div>
+    <p class="section-desc">Las palancas que más influyen en la cuenta de resultados de una institución educativa.</p>
+    <div class="impact-grid">
+      <div class="impact-card">
+        <div class="impact-header">
+          <div class="impact-icon-wrap ig">📈</div>
+          <div class="impact-title">Crecimiento de ingresos</div>
+        </div>
+        <ul class="impact-items">
+          <li>Rediseño de arquitectura de precios y modelos de tarificación</li>
+          <li>Estrategia de captación y optimización del funnel de conversión</li>
+          <li>Nuevas líneas: formación corporativa, B2B, online, internacional</li>
+          <li>Retención de alumnos y reducción de abandono</li>
+          <li>Upselling y cross-selling de programas y servicios</li>
+        </ul>
+      </div>
+      <div class="impact-card">
+        <div class="impact-header">
+          <div class="impact-icon-wrap ib">🔧</div>
+          <div class="impact-title">Optimización de márgenes</div>
+        </div>
+        <ul class="impact-items">
+          <li>Análisis y racionalización de estructura de costes</li>
+          <li>Modelo docente eficiente sin pérdida de calidad percibida</li>
+          <li>Eficiencia operativa en procesos académicos y administrativos</li>
+          <li>Estrategia de procurement y negociación con proveedores</li>
+          <li>Sistemas de información para rentabilidad por programa</li>
+        </ul>
+      </div>
+      <div class="impact-card">
+        <div class="impact-header">
+          <div class="impact-icon-wrap iy">🌐</div>
+          <div class="impact-title">Internacionalización</div>
+        </div>
+        <ul class="impact-items">
+          <li>Estrategia y plan de expansión internacional</li>
+          <li>Apertura de sedes y redes comerciales en nuevos mercados</li>
+          <li>Modelo de captación y gestión de alumnos internacionales</li>
+          <li>Acuerdos estratégicos con universidades y empresas</li>
+        </ul>
+      </div>
+      <div class="impact-card">
+        <div class="impact-header">
+          <div class="impact-icon-wrap io">🏢</div>
+          <div class="impact-title">Organización y transformación</div>
+        </div>
+        <ul class="impact-items">
+          <li>Rediseño organizativo: estructura, roles y responsabilidades</li>
+          <li>Transformación digital y adopción de nuevas metodologías</li>
+          <li>Gestión del cambio y acompañamiento al equipo directivo</li>
+          <li>Pivotaje y rediseño de modelos de negocio educativo</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXPERIENCIA -->
+  <div class="section">
+    <div class="section-label">Experiencia directiva</div>
+    <div class="section-title">Empresas donde he generado impacto</div>
+    <p class="section-desc">Más de 25 años liderando negocios educativos a nivel nacional e internacional.</p>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot">🎓</div>
+        <div>
+          <div class="tl-period">2025 – 2026</div>
+          <div class="tl-role">Director de Escuela y Restaurante</div>
+          <div class="tl-company">Escuela Hofmann · Barcelona</div>
+          <ul class="tl-highlights">
+            <li>Crecimiento del negocio del 35% en 2025</li>
+            <li>Modelo de captación internacional: 25% de la facturación</li>
+            <li>Rediseño organizativo completo y excelencia operativa</li>
+            <li>Estrategia de portfolio y optimización del margen operativo</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">💻</div>
+        <div>
+          <div class="tl-period">2021 – 2024</div>
+          <div class="tl-role">General Manager</div>
+          <div class="tl-company">Nuclio Digital School</div>
+          <ul class="tl-highlights">
+            <li>+80% facturación y +70% alumnos en 2022</li>
+            <li>Mejora de 20 puntos en margen bruto en 2023</li>
+            <li>Gestión de +200 profesores externos del área tech y digital</li>
+            <li>Responsable integral: marketing, ventas, producto, académico y postventa</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">🌍</div>
+        <div>
+          <div class="tl-period">2013 – 2019</div>
+          <div class="tl-role">Director General · Miembro del Comité de Dirección</div>
+          <div class="tl-company">Planeta Formación y Universidades (Ostelea, Deusto, EAE…)</div>
+          <ul class="tl-highlights">
+            <li>150.000 alumnos de 114 nacionalidades en el grupo</li>
+            <li>Plan de internacionalización: Europa, África, Latinoamérica</li>
+            <li>Revertí un área deficitaria (Deusto Formación) a rentabilidad positiva</li>
+            <li>Dirección General de Ostelea: campus en Barcelona, Madrid, Rabat y online</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">📦</div>
+        <div>
+          <div class="tl-period">2004 – 2013</div>
+          <div class="tl-role">Director Unidad de Negocio</div>
+          <div class="tl-company">PlanetaDeAgostini · Grupo Planeta</div>
+          <ul class="tl-highlights">
+            <li>Estrategia CRM: +50% de LTV de clientes</li>
+            <li>Nuevo modelo de captación: +25% ingresos por lanzamiento</li>
+            <li>Desarrollo de nueva línea de productos digitales</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIFERENCIADORES -->
+  <div class="section">
+    <div class="section-label">Por qué yo</div>
+    <div class="section-title">Lo que me hace diferente</div>
+    <p class="section-desc">No soy un consultor genérico que aprende el sector con tu presupuesto. Vengo del sector y tengo los resultados que lo demuestran.</p>
+    <div class="diff-grid">
+      <div class="diff-card">
+        <div class="diff-num">01</div>
+        <div>
+          <div class="diff-title">He estado en tu posición</div>
+          <div class="diff-desc">He sido Director General, he gestionado P&L, he liderado equipos de cientos de personas y he ejecutado transformaciones desde dentro. Sé lo que es posible y lo que no.</div>
+        </div>
+      </div>
+      <div class="diff-card">
+        <div class="diff-num">02</div>
+        <div>
+          <div class="diff-title">Resultados medibles y probados</div>
+          <div class="diff-desc">+80% de facturación, +20pt de margen, +35% de crecimiento, áreas deficitarias en positivo. No son proyecciones. Son hechos documentados en empresas reales.</div>
+        </div>
+      </div>
+      <div class="diff-card">
+        <div class="diff-num">03</div>
+        <div>
+          <div class="diff-title">Visión 360° del negocio educativo</div>
+          <div class="diff-desc">Marketing, ventas, producto, académico y operaciones. He gestionado todos los ejes de una institución educativa de forma integrada, no en silos.</div>
+        </div>
+      </div>
+      <div class="diff-card">
+        <div class="diff-num">04</div>
+        <div>
+          <div class="diff-title">Estrategia que se ejecuta de verdad</div>
+          <div class="diff-desc">No entrego un informe y desaparezco. Me implico en la implantación, trabajo con los equipos y ajusto el plan cuando la realidad lo exige.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLIENTES -->
+  <div class="section">
+    <div class="section-label">Clientes ideales</div>
+    <div class="section-title">¿Es tu empresa candidata?</div>
+    <p class="section-desc">Trabajo con organizaciones educativas que quieren crecer de forma sostenible y rentable.</p>
+    <div class="client-grid">
+      <div class="client-card">
+        <div class="client-emoji">🎓</div>
+        <div class="client-title">Escuelas de negocio y universidades privadas</div>
+        <div class="client-desc">Revisión de portfolio de programas, modelo de precios, captación y expansión internacional.</div>
+      </div>
+<div class="client-card">
+        <div class="client-emoji">💻</div>
+        <div class="client-title">EdTech y formación online</div>
+        <div class="client-desc">Escalado con márgenes sostenibles, pivot de modelo de negocio y diferenciación en mercados competitivos.</div>
+      </div>
+      <div class="client-card">
+        <div class="client-emoji">🍽️</div>
+        <div class="client-title">Formación especializada y vocacional</div>
+        <div class="client-desc">Escuelas de hostelería, diseño, salud, tecnología. Experiencia directa en instituciones de nicho con alta exigencia.</div>
+      </div>
+      <div class="client-card">
+        <div class="client-emoji">📈</div>
+        <div class="client-title">Grupos educativos en crecimiento</div>
+        <div class="client-desc">Profesionalización de la gestión, unificación de operaciones y garantía de rentabilidad por centro.</div>
+      </div>
+      <div class="client-card">
+        <div class="client-emoji">🔄</div>
+        <div class="client-title">Proyectos de transformación</div>
+        <div class="client-desc">Digitalización, cambio de modelo, expansión internacional o reestructuración que requieren acompañamiento experto.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-box">
+    <div class="cta-title">Hablemos de tu empresa</div>
+    <p class="cta-sub">Una primera conversación sin compromiso para entender tus retos y explorar si tiene sentido trabajar juntos.</p>
+    <div class="cta-actions">
+      <a href="https://www.linkedin.com/in/frcalabia/" class="cta-btn" target="_blank">Conectar en LinkedIn →</a>
+      <a href="mailto:frcalabia@gmail.com" class="cta-btn-ghost">frcalabia@gmail.com</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>Francesc Calabia Gibert · Consultoría Estratégica · Sector Educación · Barcelona</p>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; }
+    });
+  }, { threshold: 0.06 });
+  document.querySelectorAll('.proof-card,.prop-card,.impact-card,.diff-card,.client-card,.stat-card,.flow-step,.tl-item').forEach(el => {
+    el.style.opacity = '0'; el.style.transform = 'translateY(18px)';
+    el.style.transition = 'opacity 0.45s ease, transform 0.45s ease';
+    obs.observe(el);
+  });
+</script>
+</body>
+</html>
